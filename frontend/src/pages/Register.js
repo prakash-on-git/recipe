@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
+import './register.css';
 
 const Register = () => {
 
@@ -54,34 +55,31 @@ const Register = () => {
   };
 
   return (
-    <div className='h-[100vh] flex justify-center items-center'>
-      <div className="max-w-md mx-auto h-[40vh] p-6 shadow-lg dark:shadow-gray-700 rounded-lg ">
-        <div className="flex justify-evenly">
-          <Link to="/register">
-            <h2 className="text-2xl font-semibold mb-4 border-b-2 border-blue-600 cursor-pointer"> Register </h2>
-          </Link>
+    <div className="auth-container">
+      <div className="auth-card">
+        {/* Navigation Tabs */}
+        <div className="auth-nav">
+            <Link to="/register" className="active"> <h2>Register</h2> </Link>
+            <Link to="/login"><h2>Login</h2></Link>
+        </div>
 
-          <Link to="/login">
-            <h2 className="text-2xl font-semibold mb-4 cursor-pointer"> Login </h2>
-          </Link>
-        </div>  
+        {/* Error Message */}
+        {message && <p className="auth-error">{message}</p>}
 
-        {message && <p className="mb-4 text-red-500">{message}</p>}
-
+        {/* Registration Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} className="w-full px-4 py-2 border rounded-md dark:bg-gray-800" autoFocus/>
+            <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} className="auth-input" required autoFocus/>
 
-          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="w-full px-4 py-2 border rounded-md dark:bg-gray-800"/>
+            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="auth-input" required/>
 
-          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className="w-full px-4 py-2 border rounded-md dark:bg-gray-800"/>
+            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} className="auth-input" required/>
 
-          {/* <input type="file" accept="image/*" onChange={handleFileChange} className="w-full px-4 py-2 border rounded-md dark:bg-gray-800" /> */}
-
-          <button type="submit" disabled={loading} className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" >
-            {loading ? "Registering..." : "Register"}
-          </button>
+            <button type="submit" disabled={loading} className="auth-button">
+                {loading ? "Registering..." : "Register"}
+            </button>
         </form>
-        <ToastContainer/>
+
+        <ToastContainer />
       </div>
     </div>
   )

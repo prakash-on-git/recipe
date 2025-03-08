@@ -13,7 +13,6 @@ const authMiddleware = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         req.user = decoded;
-        console.log("Decoded JWT Payload:", decoded);
         next();
     } catch (error) {
         console.error("Error in authMiddleware:", error);

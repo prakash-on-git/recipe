@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import axios from 'axios';
 import { ChartNoAxesCombined } from 'lucide-react';
+import './popular.css';
 
 const Popular = () => {
 
@@ -36,21 +37,20 @@ const Popular = () => {
   
 
   return (
-    <div>
-      <h2 className='text-4xl mb-12 font-thin flex items-center justify-center gap-4'>
-        Popular
-        <ChartNoAxesCombined/>
-      </h2>
-      <div className='flex gap-4 justify-center flex-wrap'>
-          {popularRecipe.length > 0 ? (
-          popularRecipe.map((recipe) => (
-            <Card key={recipe._id} id={recipe._id} image={recipe.image} recipeTitle={recipe.title} likes={recipe.likes.length} prepTime={recipe.prepTime} cookTime={recipe.cookTime}/>
-          ))
+    <div className="popular-section">
+    <h2 className="popular-title"> Popular <ChartNoAxesCombined /> </h2>
+    <div className="popular-container">
+        {popularRecipe.length > 0 ? (
+            popularRecipe.map((recipe) => (
+                <Card key={recipe._id} id={recipe._id} image={recipe.image} recipeTitle={recipe.title} 
+                    likes={recipe.likes.length} prepTime={recipe.prepTime} cookTime={recipe.cookTime} 
+                />
+            ))
         ) : (
-          <p>Loading popular recipes...</p>
+            <p className="loading-text">Loading popular recipes...</p>
         )}
-      </div>
     </div>
+</div>
   )
 }
 

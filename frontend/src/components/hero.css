@@ -1,0 +1,87 @@
+.hero-container {
+    width: 100vh;
+    height: 80vh;
+    margin-bottom: 5rem;
+    position: relative;
+}
+
+/* Hero Text Box */
+.hero-text {
+    position: absolute;
+    top: 33%;
+    left: 35%;
+    transform: translateX(-50%);
+    background: transparent;
+    border-radius: 0.75rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    z-index: 10;
+}
+
+/* Main Title */
+.hero-title {
+    font-size: 3.5rem;
+    font-family: serif;
+    color: var(--heading-color);
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    color: var(--subtext-color);
+}
+
+/* Surprise Button */
+.hero-button {
+    padding: 0.5rem 1rem;
+    background-color: var(--button-primary);
+    color: var(--button-submit);
+    border-radius: 0.375rem;
+    margin-left: 7rem;
+    display: flex;
+    gap: 1rem;
+    font-family: sans-serif;
+    font-size: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.hero-button:hover {
+    background-color: var(--button-hover);
+}
+
+/* Right Section (Create & Organize) */
+.hero-actions {
+    position: absolute;
+    top: 33%;
+    right: -80%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: transparent;
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    z-index: 10;
+}
+
+.hero-actions div {
+    margin: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+/* 3D Model Canvas */
+.hero-canvas {
+    position: absolute;
+    transform: scale(1.5);
+    transform: translate(45%, 10%);
+    z-index: -99;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { CakeSlice, CircleUser, LogOut } from 'lucide-react';
+import './header.css';
 
 const Header = () => {
     const [loggedInUser, setLoggedInUser] = useState('');
@@ -22,18 +23,20 @@ const Header = () => {
     }
 
   return (
-    <div className='flex justify-between text-xl font-semibold py-2 px-10 m-2'>
-        <div className='flex gap-2 '>
-            <a href='/home'><CakeSlice size={35}/></a>
-            <div className='text-2xl'>Logo</div>
+    <div className="navbar">
+    <div className="navbar-left">
+        <a href="/home"><CakeSlice size={35} /></a>
+        <div className="navbar-logo">Logo</div>
+    </div>
+    <div className="navbar-links">
+        <div className="navbar-user">
+            <CircleUser />
+            <a href="/profile">{loggedInUser}</a>
         </div>
-        <div className='flex gap-8 text-neutral-700'>
-          <div className='flex gap-3 items-center '>
-            <CircleUser/>
-            <a href='/profile'>{loggedInUser}</a>
-          </div>
-          <button onClick={handleLogout}><LogOut size={20}/> </button>
-        </div>
+        <button className="logout-btn" onClick={handleLogout}>
+            <LogOut size={20} />
+        </button>
+      </div>
     </div>
   )
 }

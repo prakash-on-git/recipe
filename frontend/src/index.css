@@ -1,7 +1,44 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 * {
     @apply transition-colors duration-150;
+}
+
+:root {
+    --body-bg: white;
+    --body-color: black;
+    --button-submit: green;
+    --button-text: white;
+    --button-hover: darkgreen;
+    --link-color: blue;
+    --link-hover: darkblue;
+    --card-bg: #f9f9f9;
+    --card-text: black;
+    --footer-bg: #f1f1f1;
+    --footer-text: #333;
+    --border-color: #ddd;
+    --input-bg: white;
+    --input-text: black;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --body-bg: #05053a;
+    --body-color: white;
+    --button-submit: #035803;
+    --button-text: white;
+    --button-hover: #024602;
+    --link-color: lightblue;
+    --link-hover: cyan;
+    --card-bg: #1a1a40;
+    --card-text: white;
+    --footer-bg: #111827;
+    --footer-text: #9ca3af;
+    --border-color: #333;
+    --input-bg: #222;
+    --input-text: white;
+    --shadow-color: rgba(255, 255, 255, 0.1);
 }

@@ -1,0 +1,32 @@
+/* Dark mode styles */
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] {
+    background-color: #111827; /* Dark background */
+    color: white;
+}
+
+[data-theme="light"] {
+    background-color: white;
+    color: black;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    bottom: 80px;
+    right: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+}
+
+[data-theme="dark"] .dark-mode-toggle {
+    color: white;
+}

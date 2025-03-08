@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import axios from "axios";
-import Header from "../components/Header"
+import Header from "../components/Header";
+import './recipeOrganizer.css';
 
 const ItemType = "RECIPE";
 
@@ -35,7 +36,6 @@ const DraggableRecipe = ({ recipe, index, moveRecipe }) => {
 
 const RecipeOrganizer = () => {
   const token = localStorage.getItem("token");
-  console.log("token is:", token);
   
   const [categories, setCategories] = useState([]);
 
@@ -89,33 +89,31 @@ const RecipeOrganizer = () => {
 
   return (
     <div>
-      <Header/>
-    <DndProvider backend={HTML5Backend}>
-      <div className="p-5 h-[100vh]">
-        <h2 className="text-2xl font-semibold text-center mb-10">Drag & Drop Recipe Organizer</h2>
-
-        <div className="grid grid-cols-3 gap-4 w-[80%] m-auto">
-          {categories.map((category) => (
-            <div key={category.category} className="p-4 border rounded-lg shadow-md bg-gray-100 dark:bg-gray-800">
-              <h3 className="text-lg font-semibold mb-2 uppercase">{category.category}</h3>
-              {category.recipes.length > 0 ? (  
-                category.recipes.map((recipe, index) => (
-                  <DraggableRecipe key={recipe._id} recipe={recipe} index={index} category={category.category} moveRecipe={moveRecipe} />
-                ))
-              ) : (
-                <p className="text-gray-500">No recipes yet</p> 
-              )}
-            </div>
-          ))}
+      <Header />
+      <DndProvider backend={HTML5Backend}>
+        <div className="organizer-container">
+          <h2 className="organizer-title">Drag & Drop Recipe Organizer</h2>
+          <div className="recipe-grid">
+            {categories.map((category) => (
+              <div key={category.category} className="recipe-category">
+                <h3 className="category-title">{category.category}</h3>
+                {category.recipes.length > 0 ? (
+                  category.recipes.map((recipe, index) => (
+                    <DraggableRecipe key={recipe._id} recipe={recipe} index={index} category={category.category} moveRecipe={moveRecipe}/>
+                  ))
+                ) : (
+                  <p className="no-recipe">No recipes yet</p>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="save-button-container">
+            <button onClick={saveChanges} className="save-button">
+              Save Changes
+            </button>
+          </div>
         </div>
-
-        <div className="flex justify-center">
-          <button onClick={saveChanges} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
-            Save Changes
-          </button>
-        </div>
-      </div>
-    </DndProvider>
+      </DndProvider>
     </div>
   );
 };

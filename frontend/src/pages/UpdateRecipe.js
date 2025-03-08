@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import './updateRecipe.css';
 
 const UpdateRecipe = () => {
     const {id} = useParams();
@@ -33,11 +34,6 @@ const UpdateRecipe = () => {
     useEffect(() => {
         fetchRecipe();
     }, [id]);
-
-    // Handle input change with debounce
-    // const updateFormData = (e) => {
-    // };
-    
     
     const handleChange = (e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -107,7 +103,6 @@ const UpdateRecipe = () => {
         }
 
         try {
-          console.log("tokenn is:" ,token);
           
           const imageUrl = await uploadImageToCloudinary();
           if (!imageUrl) throw new Error("Image upload failed!");
@@ -131,52 +126,52 @@ const UpdateRecipe = () => {
     };
  
   return (
-      <div className="h-[100vh] flex items-center justify-center">
-    <div className="max-w-3xl h-[80vh] mx-auto p-6 bg-white shadow-lg rounded-lg dark:bg-gray-800">
-      <h2 className="text-3xl font-semibold text-center mb-6 dark:bg-gray-800">Update Recipe</h2>
+    <div className="update-recipe-container">
+      <div className="update-recipe-box">
+        <h2 className="update-title">Update Recipe</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="text" name="title" value={formData.title} placeholder="Recipe Title" className="w-full p-2 border rounded dark:bg-gray-800" onChange={handleChange} required contentEditable='true'/>
-        <textarea name="description" value={formData.description} placeholder="Short Description" className="w-full p-2 border rounded dark:bg-gray-800" onChange={handleChange} required/>
+        <form onSubmit={handleSubmit} className="update-form">
+          <input type="text" name="title" value={formData.title} placeholder="Recipe Title" className="update-input" onChange={handleChange} required/>
+          <textarea name="description" value={formData.description} placeholder="Short Description" className="update-textarea" onChange={handleChange} required/>
 
-        <div className="flex space-x-4">
-          <input type="text" name="category" value={formData.category} placeholder="Category" className="w-1/2 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-          <input type="text" name="cuisine" value={formData.cuisine} placeholder="Cuisine" className="w-1/2 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-        </div>
-
-        <div className="flex space-x-4">
-          <input type="number" name="prepTime" value={formData.prepTime} placeholder="Prep Time (mins)" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-          <input type="number" name="cookTime" value={formData.cookTime} placeholder="Cook Time (mins)" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-          <input type="number" name="totalTime" value={formData.totalTime} placeholder="Total Time (mins)" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-          <input type="number" name="servings" value={formData.servings} placeholder="Servings" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex">
-            <input type="text" value={ingredientInput} placeholder="Add Ingredient" className="w-full p-2 border rounded dark:bg-gray-800" onChange={(e) => setIngredientInput(e.target.value)} />
-            <button type="button" className="ml-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={addIngredient}>+</button>
+          <div className="update-row">
+            <input type="text" name="category" value={formData.category} placeholder="Category" className="update-input" onChange={handleChange} required />
+            <input type="text" name="cuisine" value={formData.cuisine} placeholder="Cuisine" className="update-input" onChange={handleChange} required />
           </div>
-          <ul className="list-disc pl-5 text-gray-700">{formData.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}</ul>
-        </div>
 
-        <div className="space-y-2">
-          <div className="flex">
-            <input type="text" value={stepInput} placeholder="Add Step" className="w-full p-2 border rounded dark:bg-gray-800" onChange={(e) => setStepInput(e.target.value)} />
-            <button type="button" className="ml-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={addStep}>+</button>
+          <div className="update-row">
+            <input type="number" name="prepTime" value={formData.prepTime} placeholder="Prep Time (mins)" className="update-input" onChange={handleChange} required />
+            <input type="number" name="cookTime" value={formData.cookTime} placeholder="Cook Time (mins)" className="update-input" onChange={handleChange} required />
+            <input type="number" name="totalTime" value={formData.totalTime} placeholder="Total Time (mins)" className="update-input" onChange={handleChange} required />
+            <input type="number" name="servings" value={formData.servings} placeholder="Servings" className="update-input" onChange={handleChange} required />
           </div>
-          <ol className="list-decimal pl-5 text-gray-700">{formData.steps.map((step, index) => <li key={index}>{step}</li>)}</ol>
-        </div>
 
-        <input type="file" accept="image/*" hidden id="imageUpload" onChange={handleImageChange} />
-        <label htmlFor="imageUpload" className="cursor-pointer">
-          {imagePreview ? <img src={imagePreview} alt="Preview" className="w-full h-60 object-cover rounded-md" /> : <p className="text-gray-500">Click to upload image</p>}
-        </label>
+          <div>
+            <div className="ingredient-step-container">
+              <input type="text" value={ingredientInput} placeholder="Add Ingredient" className="update-input" onChange={(e) => setIngredientInput(e.target.value)} />
+              <button type="button" className="add-button" onClick={addIngredient}>+</button>
+            </div>
+            <ul className="update-list">{formData.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}</ul>
+          </div>
 
-        <button type="submit" className="w-full py-2 bg-green-500 text-white rounded">{loading ? "Updating..." : "Update Recipe"}</button>
-        {message && <p className="text-center text-gray-600 mt-4">{message}</p>}
-      </form>
+          <div>
+            <div className="ingredient-step-container">
+              <input type="text" value={stepInput} placeholder="Add Step" className="update-input" onChange={(e) => setStepInput(e.target.value)} />
+              <button type="button" className="add-button" onClick={addStep}>+</button>
+            </div>
+            <ol className="update-list">{formData.steps.map((step, index) => <li key={index}>{step}</li>)}</ol>
+          </div>
+
+          <input type="file" accept="image/*" hidden id="imageUpload" onChange={handleImageChange} />
+          <label htmlFor="imageUpload" className="upload-container">
+            {imagePreview ? <img src={imagePreview} alt="Preview" className="upload-image" /> : <p>Click to upload image</p>}
+          </label>
+
+          <button type="submit" className="submit-button">{loading ? "Updating..." : "Update Recipe"}</button>
+          {message && <p className="message">{message}</p>}
+        </form>
       </div>
-  </div>
+    </div>
   );
 };
 

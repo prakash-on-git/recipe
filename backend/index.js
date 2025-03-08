@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const recipeRoutes = require('./routes/recipe');
+const featureFlagMiddleware = require('./middleware/featureFlag');
 
 require("dotenv").config();
 require('./models/db');
@@ -19,6 +20,9 @@ const requestLogger = (req, res, next) => {
 
 // Middleware -> to log data 
 app.use(requestLogger);
+
+// Apply Feature Flag Middleware
+app.use(featureFlagMiddleware);
 
 app.get('/ping', (req, res) => {
   res.send('Pong!');
@@ -39,8 +43,11 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
+module.exports = app;
+
 
 // npm start
+// npm test
 
 // {
 //   "username": "Prakash",

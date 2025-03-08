@@ -1,0 +1,82 @@
+.auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--body_bg);
+}
+
+.auth-card {
+    height: auto;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    background-color: var(--card-bg);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.dark .auth-card {
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.auth-nav {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.auth-nav a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.3s ease-in-out;
+}
+
+.auth-nav a:hover {
+    color: var(--button-primary);
+}
+
+.auth-nav .active {
+    border-bottom: 2px solid var(--button-primary);
+}
+
+.auth-input {
+    width: 96%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    background-color: var(--input-bg);
+    transition: border-color 0.3s ease-in-out;
+}
+
+.auth-input:focus {
+    border-color: var(--button-primary);
+    outline: none;
+}
+
+.auth-button {
+    width: 100%;
+    color: black;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: rgb(49, 58, 49);
+}
+
+.auth-button:disabled {
+    background-color: var(--disabled-bg);
+    cursor: not-allowed;
+}
+
+.auth-error {
+    margin-bottom: 1rem;
+    color: red;
+    font-weight: 500;
+}

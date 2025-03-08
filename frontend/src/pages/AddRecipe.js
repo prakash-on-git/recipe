@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from '../components/Header'
+import './addRecipe.css';
 
 const AddRecipe = () => {
 
@@ -108,73 +109,51 @@ const AddRecipe = () => {
     };
 
   return (
-  <div>
-    <Header/>
-    <div className="h-[100vh] flex items-center justify-center">
-      <div className="max-w-3xl mx-auto h-[80vh] p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-        <h2 className="text-3xl font-semibold text-center mb-6">Add a New Recipe</h2>
+    <div>
+      <Header/>
+      <div className="container">
+        <h2>Add a New Recipe</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="title" placeholder="Recipe Title" onChange={handleChange} required />
+          <textarea name="description" placeholder="Short Description" onChange={handleChange} required />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Title & Description */}
-          <input type="text" name="title" placeholder="Recipe Title" className="w-full p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-          <textarea name="description" placeholder="Short Description" className="w-full p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-
-          {/* Category & Cuisine */}
-          <div className="flex space-x-4">
-            <input type="text" name="category" placeholder="Category" className="w-1/2 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-            <input type="text" name="cuisine" placeholder="Cuisine" className="w-1/2 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
+          <div className="flex">
+            <input type="text" name="category" placeholder="Category" onChange={handleChange} required />
+            <input type="text" name="cuisine" placeholder="Cuisine" onChange={handleChange} required />
           </div>
 
-          {/* Prep, Cook, Total Time & Servings */}
-          <div className="flex space-x-4">
-            <input type="number" name="prepTime" placeholder="Prep Time (mins)" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-            <input type="number" name="cookTime" placeholder="Cook Time (mins)" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-            <input type="number" name="totalTime" placeholder="Total Time (mins)" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
-            <input type="number" name="servings" placeholder="Servings" className="w-1/4 p-2 border rounded dark:bg-gray-800" onChange={handleChange} required />
+          <div className="flex">
+            <input type="number" name="prepTime" placeholder="Prep Time (mins)" onChange={handleChange} required />
+            <input type="number" name="cookTime" placeholder="Cook Time (mins)" onChange={handleChange} required />
+            <input type="number" name="totalTime" placeholder="Total Time (mins)" onChange={handleChange} required />
+            <input type="number" name="servings" placeholder="Servings" onChange={handleChange} required />
           </div>
 
-          {/* Ingredients Input */}
-          <div className="space-y-2">
-            <div className="flex">
-              <input type="text" value={ingredientInput} placeholder="Add Ingredient" className="w-full p-2 border rounded dark:bg-gray-800" onChange={(e) => setIngredientInput(e.target.value)} />
-              <button type="button" className="ml-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={addIngredient}>+</button>
-            </div>
-            <ul className="list-disc pl-5 text-gray-700">
-              {formData.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
-            </ul>
+          <div className="input-group">
+            <input type="text" value={ingredientInput} placeholder="Add Ingredient" onChange={(e) => setIngredientInput(e.target.value)} />
+            <button type="button" onClick={addIngredient}>+</button>
+          </div>
+          <ul>{formData.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}</ul>
+
+          <div className="input-group">
+            <input type="text" value={stepInput} placeholder="Add Step" onChange={(e) => setStepInput(e.target.value)} />
+            <button type="button" onClick={addStep}>+</button>
+          </div>
+          <ol>{formData.steps.map((step, index) => <li key={index}>{step}</li>)}</ol>
+
+          <div className="image-upload">
+            <input type="file" accept="image/*" hidden id="imageUpload" onChange={handleImageChange} />
+            <label htmlFor="imageUpload">
+              {imagePreview ? <img src={imagePreview} alt="Preview" /> : <p>Drag & drop an image here or <span>click to upload</span></p>}
+            </label>
           </div>
 
-          {/* Steps Input */}
-          <div className="space-y-2">
-            <div className="flex">
-              <input type="text" value={stepInput} placeholder="Add Step" className="w-full p-2 border rounded dark:bg-gray-800" onChange={(e) => setStepInput(e.target.value)} />
-              <button type="button" className="ml-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={addStep}>+</button>
-            </div>
-            <ol className="list-decimal pl-5 text-gray-700">
-              {formData.steps.map((step, index) => <li key={index}>{step}</li>)}
-            </ol>
+          <div className="center-button">
+            <button type="submit">{loading ? "Adding..." : "Add Recipe"}</button>
           </div>
-
-          {/* Drag & Drop Image Upload */}
-          <div className="border-dashed border-2 p-6 text-center" onDrop={handleDrop} onDragOver={handleDragOver}>
-              <input type="file" accept="image/*" hidden id="imageUpload" onChange={handleImageChange} />
-              <label htmlFor="imageUpload" className="cursor-pointer">
-              {imagePreview ? (
-                  <img src={imagePreview} alt="Recipe Preview" className="w-full h-60 object-cover rounded-md" />
-              ) : (
-                  <p className="text-gray-500">Drag & drop an image here or <span className="text-blue-500">click to upload</span></p>
-              )}
-              </label>
-          </div>
-
-          {/* Submit Button */}
-          <button type="submit" className="w-full py-2 bg-green-500 text-white rounded">{loading ? "Adding..." : "Add Recipe"}</button>
-
-          {/* Message */}
-          {message && <p className="text-center text-gray-600 mt-4">{message}</p>}
+          {message && <p className="message">{message}</p>}
         </form>
       </div>
-    </div>
   </div>
   )
 }

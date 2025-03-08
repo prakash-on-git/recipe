@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import axios from 'axios';
 import { Hourglass } from 'lucide-react';
+import './latest.css';
 
 const Latest = () => {
 
@@ -35,21 +36,18 @@ const Latest = () => {
   }, [])
 
   return (
-    <div>
-      <h2 className='text-4xl my-20 font-thin flex items-center justify-center gap-4'>
-        New
-        <Hourglass/>
-      </h2>
-      <div className='flex gap-4 justify-center flex-wrap'>
-          {popularRecipe.length > 0 ? (
+    <div className="new-section">
+      <h2 className="new-title">New <Hourglass /></h2>
+      <div className="recipes-container">
+        {popularRecipe.length > 0 ? (
           popularRecipe.map((recipe) => (
-            <Card key={recipe._id} id={recipe._id} image={recipe.image} recipeTitle={recipe.title} likes={recipe.likes.length} prepTime={recipe.prepTime} cookTime={recipe.cookTime}/>
-          ))
+            <Card  key={recipe._id}  id={recipe._id}  image={recipe.image}  recipeTitle={recipe.title} likes={recipe.likes.length}  prepTime={recipe.prepTime} cookTime={recipe.cookTime} />
+            ))
         ) : (
-          <p>Loading new recipes...</p>
+          <p className="loading-text">Loading new recipes...</p>
         )}
-      </div>
-    </div>
+        </div>
+  </div>
   )
 }
 
