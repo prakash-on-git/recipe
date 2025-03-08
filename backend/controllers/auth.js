@@ -38,13 +38,12 @@ const login = async (req, res) => {
       return res.status(403).json({ message: "Invalid credentials", success: false });
     }
 
-    const jwt_token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "12h" });
-
     // Set token in HTTP-only cookie
-    res.cookie("token", jwt_token, { httpOnly: true, sameSite: "None", secure: true, maxAge: 12 * 60 * 60 * 1000});
+    // res.cookie("token", jwt_token, { httpOnly: true, sameSite: "None", secure: true, maxAge: 12 * 60 * 60 * 1000});
+    const jwtToken = jwt.sign({ email: user.email, _id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' } )
 
     // Send response
-    res.status(200).json({ message: "Login successful", success: true, jwt_token, email: user.email, username: user.username, });
+    res.status(200).json({ message: "Login successful", success: true, jwt_token: jwtToken, email: user.email, username: user.username, });
 
   } catch (error) {
     console.error("Error in login:", error);

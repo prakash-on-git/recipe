@@ -16,6 +16,8 @@ const recipeSchema = new mongoose.Schema({
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   createdAt: { type: Date, default: Date.now },
+
+  position: { type: Number, required: true, default: 0 },
 });
 
 module.exports = mongoose.model("Recipe", recipeSchema);
