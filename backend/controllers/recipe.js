@@ -10,7 +10,7 @@ const createRecipe = async (req, res) => {
       return res.status(400).json({ message: "All required fields must be filled." });
     }
 
-    const totalTime = prepTime + cookTime;
+    const totalTime = Number(prepTime) + Number(cookTime);
 
     // Create new recipe
     const newRecipe = new Recipe({ title, description, ingredients, steps, prepTime, cookTime, totalTime, servings, category, cuisine, image, author: req.user._id});

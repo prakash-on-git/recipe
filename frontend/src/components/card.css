@@ -29,7 +29,7 @@
 .card-meta {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   color: var(--footer-text);
 }
 
@@ -41,7 +41,7 @@
 
 .card-title {
   font-size: 1.25rem;
-  font-weight: 400;
+  font-weight: 300;
   /* margin-bottom: 0.5rem; */
   color: var(--card-text);
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

@@ -22,3 +22,9 @@ reportWebVitals();
 
 
 // npm start
+
+// git status
+// git branch
+// git add .
+// git commit -m "My sub-final"
+// git push origin master

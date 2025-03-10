@@ -25,8 +25,8 @@ const Header = () => {
   return (
     <div className="navbar">
     <div className="navbar-left">
-        <a href="/home"><CakeSlice size={35} /></a>
-        <div className="navbar-logo">Logo</div>
+        <a href="/home"><CakeSlice size={38} /></a>
+        {/* <div className="navbar-logo">Logo</div> */}
     </div>
     <div className="navbar-links">
         <div className="navbar-user">

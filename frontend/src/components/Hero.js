@@ -48,24 +48,23 @@ const Hero = () => {
 
       {/* Create & Organize Section */}
       <div className="hero-actions">
-          <div>
-              <DiamondPlus />
-              <Link to={"/add-recipe"} className=''>Create New</Link>
+          <div className="action-item">
+              <DiamondPlus className='icon'/>
+              <Link to={"/add-recipe"} className='link'>Create New</Link>
           </div>
-          <div>
-              <ListPlus />
-              <Link to={"/organize"}>Organize</Link>
+          <div className="action-item">
+              <ListPlus className='icon'/>
+              <Link to={"/organize"} className='link'>Organize</Link>
           </div>
       </div>  
 
       {/* 3D Model Canvas */}
       <Canvas dpr={[1, 2]} shadows gl={{ toneMappingExposure: 0.9 }} camera={{ fov: 45, position: [0, 2, 2] }} className="hero-canvas">
-        <color attach="background" args={["#fff"]} />
         <ambientLight intensity={1} />
         <directionalLight position={[1, 1, 1]} intensity={0.9} />
-        <spotLight position={[1, 1, 1]} angle={0.3} penumbra={1} intensity={0.1} castShadow />
+        <spotLight position={[1, 1, 1]} angle={0.2} penumbra={1} intensity={0.2} castShadow />
 
-        <PresentationControls speed={1.0} global zoom={1.5} polar={[-0.1, Math.PI / 4]}>
+        <PresentationControls speed={1.0} global zoom={3} polar={[-0.1, Math.PI / 4]}>
           <Stage environment="city" intensity={1}>
               <Model scale={0.99} />
           </Stage>

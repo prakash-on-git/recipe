@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <div className="auth-cardd">
+      <div className="auth-card">
         {/* Navigation Tabs */}
         <div className="auth-nav">
             <Link to="/register"> <h2>Register</h2> </Link>
